@@ -1,0 +1,40 @@
+{
+    "name": "rudl/vault",
+    "type": "project",
+    "description": "GitOps Key Vault",
+    "keywords": ["Cloud", "Secrets", "CloudIA"],
+    "homepage": "https://infracamp.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Joe Koshy Alex",
+            "email": "joe@talpa-solutions.com"
+        },
+        {
+            "name": "Matthias Leuffen",
+            "email": "m@tth.es"
+        }
+    ],
+    "require": {
+        "php": ">=7.2",
+        "phore/core": "dev-master",
+        "phore/cli-tools": "dev-master",
+        "phore/filesystem": "dev-master",
+        "phore/system": "dev-master",
+        "phore/hydrator": "dev-master",
+        "phore/misc": "dev-master"
+    },
+    "bin": [
+        "bin/cloudia"
+    ],
+
+    "require-dev": {
+        "phore/tester": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rudl\\Vault\\": "src"
+        }
+    },
+    "minimum-stability": "dev"
+}
