@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.4",
         "phore/core": "dev-master",
         "phore/cli-tools": "dev-master",
         "phore/filesystem": "dev-master",
@@ -25,7 +25,7 @@
         "phore/misc": "dev-master"
     },
     "bin": [
-        "bin/cloudia"
+        "bin/rudlvault"
     ],
 
     "require-dev": {
