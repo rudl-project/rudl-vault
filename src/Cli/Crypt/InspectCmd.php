@@ -23,6 +23,7 @@ class InspectCmd extends VaultSubCmd
     {
         $this->context = $context;
         $opts = $context->getOpts("o:");
+
         $filename = $opts->argv(0, new UserInputException("Please specify a filename to inspect"));
         $inFile = phore_file($filename);
         if ( ! $inFile->isFile())
