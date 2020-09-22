@@ -12,5 +12,5 @@ if (file_exists(__DIR__ . "/../vendor/autoload.php")) {
 /**
  * Adjust this to your CliClass
  */
-$i = new \Rudl\Vault\Cli\CliMain();
-$i->run($argv, $argc);
+$i = new \Rudl\Vault\Cli\CmdMain();
+$i->main($argv, $argc);

@@ -89,6 +89,11 @@ class KeyVault
         return $this->decrypt($secret->secret_val_enc, $secret->use_key_id);
     }
 
+    public function isKeyUnlocked(string $kid)
+    {
+        return T_KeyPair::maintain($this->unlockedKeys, ["key_id" => $kid], false, null) !== null;
+    }
+
     public function unlockKey($kid, string $secret)
     {
         $keyPair = clone T_KeyPair::maintain($this->config->config->keypairs, ["key_id" => $kid], false, new NotFoundException("KeyPair '$kid' not found."));

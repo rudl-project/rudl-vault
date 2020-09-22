@@ -1,0 +1,24 @@
+Options:
+  -C string     Location of the workdir (directory with .rudl-vault.json)
+  -h            Display this help
+
+Commands:
+  init        Initialize rudl vault (create empty .rudl-vault.json)
+  create-key-pair [key_id]
+              Create a new keypair
+  secret
+    create [name]
+    edit [name]
+    list
+
+  encrypt
+     --key_id <name>
+     --f
+
+  inspect
+     --stdin        Read secret from stdin
+     -o <output>    Output unsealed data to file
+
+  translate
+    -i <infolder>   Input folder to read
+    -o <outfolder>  Target folder to write unsealed data to
