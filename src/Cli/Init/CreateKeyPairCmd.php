@@ -14,7 +14,7 @@ class CreateKeyPairCmd extends VaultSubCmd
     public function invoke(CliContext $context)
     {
         $opts = $context->getOpts();
-        $keyId = $opts->argv(0) ?? $context->ask("New name for new key: ", null, "/^[a-zA-Z0-9]+$/");
+        $keyId = $opts->argv(0) ?? $context->ask("New name for new key: ", "default", "/^[a-zA-Z0-9]+$/");
         $passphrase = $context->ask("Specify secret for private key (leave blanc to generate): ", "");
 
         $context->out("\n");
