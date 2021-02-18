@@ -27,22 +27,31 @@ class MultilineFormat
 
     public function encode(string $input, string $key_id) : string
     {
-        $line = "\n===== Start RudlVault Encoded Content - KeyId: $key_id =====\n";
+        $line = "===== Start RudlVault Sealed Content - KeyId: $key_id =====\n";
         $line .= chunk_split(phore_base64url_encode($this->keyVault->encrypt($input, $key_id)));
-        $line .= "\n==== End RudlVault Encoded Content =====";
+        $line .= "==== End RudlVault Sealed Content =====\n";
         return $line;
     }
 
     public function decode(string $input) : string
     {
-        $input = str_replace("\r\n", \n, $input);
-        return phore_misc_string($input)->regex("/\n={3,}.*?KeyId: (?<keyId>[a-zA-Z0-9_-]+)={3,}\n(?<enc>.*?)\n={3,}.*?={3,}\n/m")
-            ->replaceCallback(function ($keyId, $enc) {
-                $enc = str_replace("\n", "", $enc);
-                if ( ! $this->keyVault->isKeyUnlocked($keyId)) {
-                    $this->keyLoader->loadKey($keyId, $this->keyVault);
+        $parseText = trim (str_replace("\r\n", "\n", $input));
+
+        $exp = explode("\n", $parseText);
+        $sealedContent = "";
+        if (preg_match("/^\={3,}.*?KeyId: (?<keyId>[a-zA-Z0-9_-]+)/", trim($exp[0]), $matches)) {
+            $keyId = $matches["keyId"];
+            for ($i = 1; $i<count ($exp); $i++) {
+                if (preg_match("/^={3,}/", trim ($exp[$i]))) {
+                    break;
                 }
-                return $this->keyVault->decrypt(phore_base64url_decode($enc), $keyId);
-            });
+                $sealedContent .= trim ($exp[$i]);
+            }
+            if ( ! $this->keyVault->isKeyUnlocked($keyId)) {
+                $this->keyLoader->loadKey($keyId, $this->keyVault);
+            }
+            return $this->keyVault->decrypt(phore_base64url_decode($sealedContent), $keyId);
+        }
+        return $input;
     }
 }
