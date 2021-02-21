@@ -7,6 +7,7 @@ Commands:
   create-key-pair [key_id]
               Create a new keypair
   secret
+    generate [name]
     create [name]
     edit [name]
     list

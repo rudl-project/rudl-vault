@@ -11,6 +11,7 @@ use Phore\CliTools\PhoreAbstractMainCmd;
 use Phore\FileSystem\PhoreDirectory;
 use Phore\FileSystem\PhoreTempFile;
 use Rudl\Vault\Cli\Crypt\EncryptCmd;
+use Rudl\Vault\Cli\Crypt\GenerateCmd;
 use Rudl\Vault\Cli\Crypt\InspectCmd;
 use Rudl\Vault\Cli\Glob\EditSecretCmd;
 use Rudl\Vault\Cli\Glob\SecretCreateCmd;
@@ -66,6 +67,7 @@ class CmdMain extends PhoreAbstractMainCmd
             "init" => new InitCmd($this->workdir, $this->config),
             "create-key-pair" => new CreateKeyPairCmd($this->config, $this->keyVault),
             "secret" => [
+                "generate" => new GenerateCmd($this->config, $this->keyVault),
                 "create" => new SecretCreateCmd($this->config, $this->keyVault),
                 "edit" => new EditSecretCmd($this->config, $this->keyVault)
             ],
